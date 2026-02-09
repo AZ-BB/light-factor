@@ -15,7 +15,7 @@ export default function Hero() {
     >
       <div className="flex flex-col lg:flex-row lg:min-h-screen w-full">
         {/* Left column — copy (45%) */}
-        <div className="flex-[9] flex flex-col justify-end px-6 sm:px-8 lg:px-12 xl:px-16 py-16 lg:py-20 min-w-0 scale-100 max-[1600px]:scale-[0.8]">
+        <div className="flex-[9] flex flex-col justify-end px-6 sm:px-8 lg:px-12 xl:px-16 py-16 lg:py-20 min-w-0 scale-100 md:scale-[0.85] min-[1600px]:scale-100 origin-bottom-left">
           <motion.div
             className="max-w-2xl"
             initial={{ opacity: 0, x: -40 }}
