@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const container = {
   hidden: { opacity: 0 },
@@ -40,9 +41,12 @@ export default function About() {
             variants={item}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-transparent" />
-            <div className="absolute inset-0 flex items-center justify-center text-soft-white/20 text-sm">
-              [ Image placeholder ]
-            </div>
+            <Image
+              src="/projects/doret-el-karz/1.png"
+              alt="Marsa Alam Cultural Center"
+              fill
+              className="object-cover object-center"
+            />
           </motion.div>
         </motion.div>
       </div>

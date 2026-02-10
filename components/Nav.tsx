@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const links = [
   { href: "#hero", label: "Home" },
@@ -39,7 +40,12 @@ export default function Nav() {
             href="#hero"
             className="font-display text-xl font-semibold tracking-tight text-soft-white hover:text-accent transition-colors"
           >
-            Light Faktor
+            <Image
+              src="/logo/horizontal-white-no-bg.png"
+              alt="Light Faktor"
+              width={150}
+              height={100}
+            />
           </Link>
 
           <ul className="hidden md:flex items-center gap-8">

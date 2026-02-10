@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Services from "@/sections/Services";
@@ -18,6 +19,7 @@ export default function Home() {
       <Process />
       <Values />
       <Contact />
+      <Footer />
     </main>
   );
 }
