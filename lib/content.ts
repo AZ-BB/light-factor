@@ -3,7 +3,6 @@
 import { revalidateTag, unstable_cache } from "next/cache";
 import { getKVValue, saveKVValue } from "./kv-store";
 import type { ContentData, LanguageContent } from "@/types/content";
-import { CONTENT_KEY } from "./constants";
 
 const CACHE_REVALIDATE = 3600; // 1 hour
 
@@ -21,7 +20,7 @@ async function loadFallbackContent(): Promise<ContentData> {
 async function fetchContent(): Promise<ContentData> {
   console.log("[KV] fetchContent called (check terminal, not browser console)");
   try {
-    const kvContent = await getKVValue<ContentData>(CONTENT_KEY);
+    const kvContent = await getKVValue<ContentData>();
     if (kvContent && kvContent.languages) {
       return kvContent;
     }
@@ -69,7 +68,7 @@ export async function getContentByLanguage(
  */
 export async function resetContentToFallback(): Promise<ContentData> {
   const content = await loadFallbackContent();
-  await saveKVValue(CONTENT_KEY, content);
+  await saveKVValue(content);
   revalidateTag("site-content");
   return content;
 }
@@ -78,7 +77,7 @@ export async function resetContentToFallback(): Promise<ContentData> {
  * Save content to KV store
  */
 export async function saveContent(content: ContentData): Promise<ContentData> {
-  await saveKVValue(CONTENT_KEY, content);
+  await saveKVValue(content);
   revalidateTag("site-content");
   return content;
 }

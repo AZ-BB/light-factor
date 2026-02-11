@@ -13,15 +13,9 @@
  * 
  * @example
  * ```ts
- * import { getKVValue, saveKVValue, getKVData, saveKVData } from '@/lib/kv-store';
- * 
- * // Direct utility functions (use in Server Components, API routes)
- * const data = await getKVValue('my-key');
- * await saveKVValue('my-key', { name: 'John', age: 30 });
- * 
- * // Server Actions (use in Client Components, form actions)
- * const data = await getKVData('my-key');
- * await saveKVData('my-key', { name: 'John', age: 30 });
+ * import { getKVValue, saveKVValue } from '@/lib/kv-store';
+ * const data = await getKVValue();
+ * await saveKVValue({ name: 'John', age: 30 });
  * ```
  */
 
@@ -53,23 +47,12 @@ function getKVConfig() {
 }
 
 /**
- * Get a value from the KV store by key
- * 
- * @param key - The key to retrieve from the KV store
- * @returns The value object associated with the key, or null if not found
- * @throws Error if the request fails or configuration is missing
- * 
- * @example
- * ```ts
- * const user = await getKVValue('user:123');
- * if (user) {
- *   console.log(user.name);
- * }
- * ```
+ * Get the value from the KV store for the namespace.
+ * API returns { key, value } - we use value directly.
+ *
+ * @returns The value object, or null if not found
  */
-export async function getKVValue<T = Record<string, unknown>>(
-  key: string
-): Promise<T | null> {
+export async function getKVValue<T = Record<string, unknown>>(): Promise<T | null> {
   try {
     const { url, apiKey, namespace } = getKVConfig();
     const endpoint = `${url}/${namespace}`;
@@ -81,14 +64,14 @@ export async function getKVValue<T = Record<string, unknown>>(
         "X-API-KEY": apiKey,
         "Content-Type": "application/json",
       },
-      cache: "no-store", // Ensure fresh data on each request
+      cache: "no-store",
     });
 
     console.log("[KV] Response status:", response.status, response.statusText);
 
     if (!response.ok) {
       if (response.status === 404) {
-        console.warn("[KV] 404 – key not found:", key);
+        console.warn("[KV] 404 – not found");
         return null;
       }
 
@@ -107,36 +90,38 @@ export async function getKVValue<T = Record<string, unknown>>(
     const data = await response.json();
 
     if (!data || typeof data !== "object") {
-      console.warn("[KV] Empty or invalid response body. Key:", key);
+      console.warn("[KV] Empty or invalid response body");
       return null;
     }
 
-    // Unwrap until we get content with .languages (handles nested { key, value })
-    let current: unknown = data;
-    while (current != null && typeof current === "object") {
-      const obj = current as Record<string, unknown>;
-      if (obj.languages != null && typeof obj.languages === "object") {
-        return current as T;
-      }
-      if (obj.value != null) {
-        if (typeof obj.value === "string") {
-          try {
-            current = JSON.parse(obj.value);
-          } catch {
-            break;
-          }
-        } else {
-          current = obj.value;
-        }
-        continue;
-      }
-      break;
+    // API returns { key, value } - use value directly
+    const value = data.value;
+    if (value == null) {
+      console.warn("[KV] No value in response");
+      return null;
     }
 
-    console.warn("[KV] No content with languages found in response. Key:", key);
+    // If value is nested { key, value }, unwrap to get actual content
+    let current: unknown = value;
+    if (typeof current === "object" && current !== null && "value" in (current as object)) {
+      const inner = (current as Record<string, unknown>).value;
+      if (inner != null && typeof inner === "object" && "languages" in (inner as object)) {
+        current = inner;
+      }
+    }
+
+    if (typeof current === "object" && current !== null && "languages" in (current as object)) {
+      return current as T;
+    }
+
+    if (typeof current === "object" && current !== null) {
+      return current as T;
+    }
+
+    console.warn("[KV] Unexpected value format");
     return null;
   } catch (error) {
-    console.error(`[KV] Error fetching key "${key}":`, error);
+    console.error("[KV] Error fetching:", error);
     if (error instanceof Error) {
       throw error;
     }
@@ -145,34 +130,16 @@ export async function getKVValue<T = Record<string, unknown>>(
 }
 
 /**
- * Save a value to the KV store
- * 
- * @param key - The key to save the value under
- * @param value - The value object to save (will be JSON stringified)
+ * Save a value to the KV store.
+ * POST body is the value directly (no key wrapper).
+ *
+ * @param value - The value object to save
  * @returns The saved value object
- * @throws Error if the request fails or configuration is missing
- * 
- * @example
- * ```ts
- * await saveKVValue('user:123', {
- *   name: 'John Doe',
- *   email: 'john@example.com',
- *   createdAt: new Date().toISOString()
- * });
- * ```
  */
-export async function saveKVValue<T = Record<string, unknown>>(
-  key: string,
-  value: T
-): Promise<T> {
+export async function saveKVValue<T = Record<string, unknown>>(value: T): Promise<T> {
   try {
     const { url, apiKey, namespace } = getKVConfig();
     const endpoint = `${url}/${namespace}`;
-
-    const requestBody = {
-      key,
-      value,
-    };
 
     const response = await fetch(endpoint, {
       method: "POST",
@@ -180,7 +147,7 @@ export async function saveKVValue<T = Record<string, unknown>>(
         "X-API-KEY": apiKey,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(value),
       cache: "no-store",
     });
 
@@ -190,15 +157,20 @@ export async function saveKVValue<T = Record<string, unknown>>(
         const errorData: KVError = await response.json();
         errorMessage = errorData.error || errorData.message || errorMessage;
       } catch {
-        // If error response is not JSON, use default message
+        // ignored
       }
 
       throw new Error(errorMessage);
     }
 
-    const data: KVResponse = await response.json();
+    const data = await response.json();
 
-    return data.value as T;
+    // API may return { key, value } - return value if present
+    if (data && typeof data === "object" && "value" in data) {
+      return data.value as T;
+    }
+
+    return value;
   } catch (error) {
     if (error instanceof Error) {
       throw error;
@@ -208,59 +180,25 @@ export async function saveKVValue<T = Record<string, unknown>>(
 }
 
 /**
- * Server Action: Get a value from the KV store
- * 
- * Use this in Client Components and form actions.
- * 
- * @param key - The key to retrieve from the KV store
- * @returns The value object associated with the key, or null if not found
- * @throws Error if the request fails or configuration is missing
- * 
- * @example
- * ```tsx
- * import { getKVData } from '@/lib/kv-store';
- * 
- * async function handleSubmit(formData: FormData) {
- *   const data = await getKVData('my-key');
- * }
- * ```
+ * Server Action: Get value from the KV store
  */
-export async function getKVData<T = Record<string, unknown>>(key: string) {
+export async function getKVData<T = Record<string, unknown>>() {
   try {
-    return await getKVValue<T>(key);
+    return await getKVValue<T>();
   } catch (error) {
-    console.error(`Error getting KV data for key "${key}":`, error);
+    console.error("[KV] Error getting data:", error);
     throw error;
   }
 }
 
 /**
- * Server Action: Save a value to the KV store
- * 
- * Use this in Client Components and form actions.
- * 
- * @param key - The key to save the value under
- * @param value - The value object to save (will be JSON stringified)
- * @returns The saved value object
- * @throws Error if the request fails or configuration is missing
- * 
- * @example
- * ```tsx
- * import { saveKVData } from '@/lib/kv-store';
- * 
- * async function handleSubmit(formData: FormData) {
- *   await saveKVData('my-key', { name: formData.get('name') });
- * }
- * ```
+ * Server Action: Save value to the KV store
  */
-export async function saveKVData<T = Record<string, unknown>>(
-  key: string,
-  value: T
-) {
+export async function saveKVData<T = Record<string, unknown>>(value: T) {
   try {
-    return await saveKVValue<T>(key, value);
+    return await saveKVValue<T>(value);
   } catch (error) {
-    console.error(`Error saving KV data for key "${key}":`, error);
+    console.error("[KV] Error saving data:", error);
     throw error;
   }
 }
