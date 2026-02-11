@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getContent, resetContentToFallback, saveContent } from "@/lib/content";
 import { getKVValue } from "@/lib/kv-store";
-import { CONTENT_KEY } from "@/lib/constants";
 import CMSEditor from "./CMSEditor";
 import LogoutButton from "../components/LogoutButton";
 
@@ -19,7 +18,7 @@ export default async function AdminContentPage() {
   let content = await getContent();
 
   try {
-    const kvContent = await getKVValue(CONTENT_KEY);
+    const kvContent = await getKVValue();
     if (kvContent && typeof kvContent === "object" && "languages" in kvContent) {
       contentSource = "kv";
     }
