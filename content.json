@@ -1,0 +1,606 @@
+{
+  "languages": {
+    "en": {
+      "alignment": "ltr",
+      "metadata": {
+        "title": "Light Faktor | Architectural Lighting",
+        "description": "Inspired by History. Powered by Light. Architectural lighting for Egypt's future."
+      },
+      "navigation": {
+        "logo": {
+          "image": "/logo/horizontal-white-no-bg.png",
+          "alt": "Light Faktor"
+        },
+        "links": [
+          { "href": "#hero", "label": "Home" },
+          { "href": "#about", "label": "About" },
+          { "href": "#services", "label": "Services" },
+          { "href": "#portfolio", "label": "Portfolio" },
+          { "href": "#process", "label": "Process" },
+          { "href": "#values", "label": "Values" },
+          { "href": "#contact", "label": "Contact" }
+        ]
+      },
+      "sections": {
+        "hero": {
+          "id": "hero",
+          "brand": "Light Faktor",
+          "title": "A New Light for",
+          "titleHighlight": "Egypt's Future",
+          "subtitle": "Inspired by History. Powered by Light.",
+          "cta": {
+            "text": "View Our Work",
+            "href": "#portfolio"
+          },
+          "image": {
+            "url": "/1.jpg",
+            "alt": "Architectural lighting — Light Faktor"
+          }
+        },
+        "about": {
+          "id": "about",
+          "label": "About Us",
+          "title": "Where heritage meets innovation",
+          "paragraphs": [
+            "Light Faktor specializes in architectural lighting that honors Egypts rich heritage while embracing forward-looking design. We create environments where light shapes space, emotion, and experience.",
+            "From monumental projects to intimate interiors, we bring precision, artistry, and sustainable solutions to every commission."
+          ],
+          "image": {
+            "url": "/projects/doret-el-karz/1.png",
+            "alt": "Marsa Alam Cultural Center"
+          }
+        },
+        "services": {
+          "id": "services",
+          "label": "What We Do",
+          "title": "Lighting Solutions",
+          "items": [
+            {
+              "icon": "◇",
+              "title": "Heritage Lighting",
+              "description": "Restoration and enhancement of historic sites with light."
+            },
+            {
+              "icon": "▣",
+              "title": "Architectural Facades",
+              "description": "Dynamic illumination for buildings and urban landmarks."
+            },
+            {
+              "icon": "○",
+              "title": "Interior Lighting",
+              "description": "Ambient and task lighting for commercial and residential."
+            },
+            {
+              "icon": "◐",
+              "title": "Smart Systems",
+              "description": "Integrated controls and sustainable solutions."
+            }
+          ]
+        },
+        "portfolio": {
+          "id": "portfolio",
+          "label": "Portfolio",
+          "title": "Selected Work",
+          "projects": [
+            {
+              "title": "Marsa Alam Cultural Center",
+              "category": "Heritage",
+              "images": [
+                "/projects/marsa/1.png",
+                "/projects/marsa/2.png",
+                "/projects/marsa/3.png",
+                "/projects/marsa/4.png",
+                "/projects/marsa/5.png"
+              ]
+            },
+            {
+              "title": "Doret El Karz",
+              "category": "Interior",
+              "images": [
+                "/projects/doret-el-karz/1.png",
+                "/projects/doret-el-karz/2.png",
+                "/projects/doret-el-karz/3.png"
+              ]
+            },
+            {
+              "title": "Marina Hotel & Resort",
+              "category": "Hospitality",
+              "images": [
+                "/projects/marina/1.jpg",
+                "/projects/marina/2.jpg"
+              ]
+            },
+            {
+              "title": "MASSAR Compound",
+              "category": "Interior",
+              "images": [
+                "/projects/MASSAR-Compound/1.jfif",
+                "/projects/MASSAR-Compound/2.jfif",
+                "/projects/MASSAR-Compound/3.jfif",
+                "/projects/MASSAR-Compound/4.jfif",
+                "/projects/MASSAR-Compound/5.jfif",
+                "/projects/MASSAR-Compound/6.jfif",
+                "/projects/MASSAR-Compound/7.jfif",
+                "/projects/MASSAR-Compound/8.jfif"
+              ]
+            },
+            {
+              "title": "Eclipse Mall",
+              "category": "Commercial",
+              "images": [
+                "/projects/eclipse/1.png",
+                "/projects/eclipse/2.png"
+              ]
+            },
+            {
+              "title": "IFT Corporation",
+              "category": "Corporate",
+              "images": [
+                "/projects/IFT/1.jpg",
+                "/projects/IFT/2.jpg",
+                "/projects/IFT/3.jpg"
+              ]
+            }
+          ]
+        },
+        "process": {
+          "id": "process",
+          "label": "How We Work",
+          "title": "Our Process",
+          "steps": [
+            {
+              "number": "01",
+              "title": "Discovery",
+              "description": "Understanding your vision and constraints."
+            },
+            {
+              "number": "02",
+              "title": "Concept",
+              "description": "Design direction and lighting strategy."
+            },
+            {
+              "number": "03",
+              "title": "Design",
+              "description": "Detailed plans, specs, and visualizations."
+            },
+            {
+              "number": "04",
+              "title": "Delivery",
+              "description": "Installation, commissioning, and handover."
+            }
+          ]
+        },
+        "values": {
+          "id": "values",
+          "label": "Our Foundation",
+          "title": "Values",
+          "items": [
+            {
+              "title": "Integrity",
+              "description": "Transparency and accountability in every project."
+            },
+            {
+              "title": "Innovation",
+              "description": "Pushing boundaries with light and technology."
+            },
+            {
+              "title": "Sustainability",
+              "description": "Efficient, responsible lighting for the future."
+            },
+            {
+              "title": "Excellence",
+              "description": "Relentless attention to detail and craft."
+            }
+          ]
+        },
+        "contact": {
+          "id": "contact",
+          "label": "Get in Touch",
+          "title": "Start a Project",
+          "form": {
+            "fields": [
+              {
+                "name": "name",
+                "label": "Name",
+                "type": "text",
+                "placeholder": "Your name"
+              },
+              {
+                "name": "email",
+                "label": "Email",
+                "type": "email",
+                "placeholder": "you@example.com"
+              },
+              {
+                "name": "phone",
+                "label": "Phone",
+                "type": "tel",
+                "placeholder": "+20 XXX XXX XXXX"
+              },
+              {
+                "name": "message",
+                "label": "Message",
+                "type": "textarea",
+                "placeholder": "Tell us about your project..."
+              }
+            ],
+            "submit": {
+              "text": "Start a Project",
+              "success": "Thank you. We'll be in touch."
+            }
+          }
+        }
+      },
+      "footer": {
+        "title": "Contact Us",
+        "branches": [
+          {
+            "name": "Egypt Branch",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "+201070045444"
+              },
+              {
+                "icon": "phone",
+                "text": "+2-25387559"
+              },
+              {
+                "icon": "location",
+                "text": "Egypt: EL-lotus, block 65, new Cairo fifth settlement, Cairo"
+              }
+            ]
+          },
+          {
+            "name": "Germany Branch",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "+49 176 40470227"
+              },
+              {
+                "icon": "location",
+                "text": "Baustrasse 31, 47137 Duisburg"
+              }
+            ]
+          },
+          {
+            "name": "Oman Branch",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "00968 24472622"
+              },
+              {
+                "icon": "phone",
+                "text": "00968 99413130"
+              },
+              {
+                "icon": "location",
+                "text": "Almaha st. 42, Muscat, Oman"
+              },
+              {
+                "icon": "email",
+                "text": "Info@hany-george.com"
+              },
+              {
+                "icon": "box",
+                "text": "P.O. Box: 149, PC 200"
+              },
+              {
+                "icon": "doc",
+                "text": "CR number: 1477965"
+              }
+            ]
+          }
+        ],
+        "emails": [
+          "info@light-faktor.com",
+          "technical@light-faktor.com"
+        ],
+        "closing": "Thank You"
+      }
+    },
+    "ar": {
+      "alignment": "rtl",
+      "metadata": {
+        "title": "Light Faktor | الإضاءة المعمارية",
+        "description": "مستوحى من التاريخ. مدعوم بالضوء. إضاءة معمارية لمستقبل مصر."
+      },
+      "navigation": {
+        "logo": {
+          "image": "/logo/horizontal-white-no-bg.png",
+          "alt": "Light Faktor"
+        },
+        "links": [
+          { "href": "#hero", "label": "الرئيسية" },
+          { "href": "#about", "label": "من نحن" },
+          { "href": "#services", "label": "خدماتنا" },
+          { "href": "#portfolio", "label": "معرض الأعمال" },
+          { "href": "#process", "label": "عملنا" },
+          { "href": "#values", "label": "قيمنا" },
+          { "href": "#contact", "label": "اتصل بنا" }
+        ]
+      },
+      "sections": {
+        "hero": {
+          "id": "hero",
+          "brand": "Light Faktor",
+          "title": "ضوء جديد",
+          "titleHighlight": "لمستقبل مصر",
+          "subtitle": "مستوحى من التاريخ. مدعوم بالضوء.",
+          "cta": {
+            "text": "شاهد أعمالنا",
+            "href": "#portfolio"
+          },
+          "image": {
+            "url": "/1.jpg",
+            "alt": "الإضاءة المعمارية — Light Faktor"
+          }
+        },
+        "about": {
+          "id": "about",
+          "label": "من نحن",
+          "title": "حيث يلتقي التراث بالابتكار",
+          "paragraphs": [
+            "تتخصص Light Faktor في الإضاءة المعمارية التي تكرم التراث الغني لمصر مع احتضان التصميم المستقبلي. نخلق بيئات حيث يشكل الضوء المساحة والعاطفة والتجربة.",
+            "من المشاريع الضخمة إلى التصاميم الداخلية الحميمة، نقدم الدقة والفنية والحلول المستدامة لكل مشروع."
+          ],
+          "image": {
+            "url": "/projects/doret-el-karz/1.png",
+            "alt": "مركز مرسى علم الثقافي"
+          }
+        },
+        "services": {
+          "id": "services",
+          "label": "ما نقدمه",
+          "title": "حلول الإضاءة",
+          "items": [
+            {
+              "icon": "◇",
+              "title": "إضاءة التراث",
+              "description": "ترميم وتعزيز المواقع التاريخية بالضوء."
+            },
+            {
+              "icon": "▣",
+              "title": "الواجهات المعمارية",
+              "description": "إضاءة ديناميكية للمباني والمعالم الحضرية."
+            },
+            {
+              "icon": "○",
+              "title": "الإضاءة الداخلية",
+              "description": "إضاءة عامة ومهام للمشاريع التجارية والسكنية."
+            },
+            {
+              "icon": "◐",
+              "title": "الأنظمة الذكية",
+              "description": "أنظمة تحكم متكاملة وحلول مستدامة."
+            }
+          ]
+        },
+        "portfolio": {
+          "id": "portfolio",
+          "label": "معرض الأعمال",
+          "title": "أعمال مختارة",
+          "projects": [
+            {
+              "title": "مركز مرسى علم الثقافي",
+              "category": "تراث",
+              "images": [
+                "/projects/marsa/1.png",
+                "/projects/marsa/2.png",
+                "/projects/marsa/3.png",
+                "/projects/marsa/4.png",
+                "/projects/marsa/5.png"
+              ]
+            },
+            {
+              "title": "دوريت الكرز",
+              "category": "داخلي",
+              "images": [
+                "/projects/doret-el-karz/1.png",
+                "/projects/doret-el-karz/2.png",
+                "/projects/doret-el-karz/3.png"
+              ]
+            },
+            {
+              "title": "فندق ومنتجع مارينا",
+              "category": "ضيافة",
+              "images": [
+                "/projects/marina/1.jpg",
+                "/projects/marina/2.jpg"
+              ]
+            },
+            {
+              "title": "مجمع ماسار",
+              "category": "داخلي",
+              "images": [
+                "/projects/MASSAR-Compound/1.jfif",
+                "/projects/MASSAR-Compound/2.jfif",
+                "/projects/MASSAR-Compound/3.jfif",
+                "/projects/MASSAR-Compound/4.jfif",
+                "/projects/MASSAR-Compound/5.jfif",
+                "/projects/MASSAR-Compound/6.jfif",
+                "/projects/MASSAR-Compound/7.jfif",
+                "/projects/MASSAR-Compound/8.jfif"
+              ]
+            },
+            {
+              "title": "مول إكلبس",
+              "category": "تجاري",
+              "images": [
+                "/projects/eclipse/1.png",
+                "/projects/eclipse/2.png"
+              ]
+            },
+            {
+              "title": "شركة IFT",
+              "category": "شركات",
+              "images": [
+                "/projects/IFT/1.jpg",
+                "/projects/IFT/2.jpg",
+                "/projects/IFT/3.jpg"
+              ]
+            }
+          ]
+        },
+        "process": {
+          "id": "process",
+          "label": "كيف نعمل",
+          "title": "عملنا",
+          "steps": [
+            {
+              "number": "01",
+              "title": "الاكتشاف",
+              "description": "فهم رؤيتك والقيود الخاصة بك."
+            },
+            {
+              "number": "02",
+              "title": "المفهوم",
+              "description": "اتجاه التصميم واستراتيجية الإضاءة."
+            },
+            {
+              "number": "03",
+              "title": "التصميم",
+              "description": "خطط تفصيلية ومواصفات وتصورات."
+            },
+            {
+              "number": "04",
+              "title": "التسليم",
+              "description": "التركيب والتشغيل والتسليم."
+            }
+          ]
+        },
+        "values": {
+          "id": "values",
+          "label": "أساسنا",
+          "title": "قيمنا",
+          "items": [
+            {
+              "title": "النزاهة",
+              "description": "الشفافية والمساءلة في كل مشروع."
+            },
+            {
+              "title": "الابتكار",
+              "description": "دفع الحدود بالضوء والتكنولوجيا."
+            },
+            {
+              "title": "الاستدامة",
+              "description": "إضاءة فعالة ومسؤولة للمستقبل."
+            },
+            {
+              "title": "التميز",
+              "description": "اهتمام لا يتوقف بالتفاصيل والحرفية."
+            }
+          ]
+        },
+        "contact": {
+          "id": "contact",
+          "label": "تواصل معنا",
+          "title": "ابدأ مشروعك",
+          "form": {
+            "fields": [
+              {
+                "name": "name",
+                "label": "الاسم",
+                "type": "text",
+                "placeholder": "اسمك"
+              },
+              {
+                "name": "email",
+                "label": "البريد الإلكتروني",
+                "type": "email",
+                "placeholder": "you@example.com"
+              },
+              {
+                "name": "phone",
+                "label": "الهاتف",
+                "type": "tel",
+                "placeholder": "+20 XXX XXX XXXX"
+              },
+              {
+                "name": "message",
+                "label": "الرسالة",
+                "type": "textarea",
+                "placeholder": "أخبرنا عن مشروعك..."
+              }
+            ],
+            "submit": {
+              "text": "ابدأ مشروعك",
+              "success": "شكراً لك. سنتواصل معك قريباً."
+            }
+          }
+        }
+      },
+      "footer": {
+        "title": "اتصل بنا",
+        "branches": [
+          {
+            "name": "فرع مصر",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "+201070045444"
+              },
+              {
+                "icon": "phone",
+                "text": "+2-25387559"
+              },
+              {
+                "icon": "location",
+                "text": "مصر: اللوتس، بلوك 65، القاهرة الجديدة التجمع الخامس، القاهرة"
+              }
+            ]
+          },
+          {
+            "name": "فرع ألمانيا",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "+49 176 40470227"
+              },
+              {
+                "icon": "location",
+                "text": "Baustrasse 31, 47137 Duisburg"
+              }
+            ]
+          },
+          {
+            "name": "فرع عمان",
+            "items": [
+              {
+                "icon": "phone",
+                "text": "00968 24472622"
+              },
+              {
+                "icon": "phone",
+                "text": "00968 99413130"
+              },
+              {
+                "icon": "location",
+                "text": "شارع المها 42، مسقط، عمان"
+              },
+              {
+                "icon": "email",
+                "text": "Info@hany-george.com"
+              },
+              {
+                "icon": "box",
+                "text": "صندوق بريد: 149، الرمز البريدي 200"
+              },
+              {
+                "icon": "doc",
+                "text": "رقم السجل التجاري: 1477965"
+              }
+            ]
+          }
+        ],
+        "emails": [
+          "info@light-faktor.com",
+          "technical@light-faktor.com"
+        ],
+        "closing": "شكراً لك"
+      }
+    }
+  }
+}

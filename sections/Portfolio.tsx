@@ -3,62 +3,11 @@
 import { useState, useCallback, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
+import type { PortfolioProject, PortfolioSection } from "@/types/content"
 
-const projects = [
-  {
-    title: "Marsa Alam Cultural Center",
-    category: "Heritage",
-    images: [
-      "/projects/marsa/1.png",
-      "/projects/marsa/2.png",
-      "/projects/marsa/3.png",
-      "/projects/marsa/4.png",
-      "/projects/marsa/5.png",
-    ],
-  },
-  {
-    title: "Doret El Karz",
-    category: "Interior",
-    images: [
-      "/projects/doret-el-karz/1.png",
-      "/projects/doret-el-karz/2.png",
-      "/projects/doret-el-karz/3.png",
-    ],
-  },
-  {
-    title: "Marina Hotel & Resort",
-    category: "Hospitality",
-    images: ["/projects/marina/1.jpg", "/projects/marina/2.jpg"],
-  },
-  {
-    title: "MASSAR Compound",
-    category: "Interior",
-    images: [
-      "/projects/MASSAR-Compound/1.jfif",
-      "/projects/MASSAR-Compound/2.jfif",
-      "/projects/MASSAR-Compound/3.jfif",
-      "/projects/MASSAR-Compound/4.jfif",
-      "/projects/MASSAR-Compound/5.jfif",
-      "/projects/MASSAR-Compound/6.jfif",
-      "/projects/MASSAR-Compound/7.jfif",
-      "/projects/MASSAR-Compound/8.jfif",
-    ],
-  },
-  {
-    title: "Eclipse Mall",
-    category: "Commercial",
-    images: ["/projects/eclipse/1.png", "/projects/eclipse/2.png"],
-  },
-  {
-    title: "IFT Corporation",
-    category: "Corporate",
-    images: [
-      "/projects/IFT/1.jpg",
-      "/projects/IFT/2.jpg",
-      "/projects/IFT/3.jpg",
-    ],
-  },
-]
+interface PortfolioProps {
+  content: PortfolioSection;
+}
 
 const container = {
   hidden: { opacity: 0 },
@@ -73,10 +22,9 @@ const item = {
   visible: { opacity: 1, y: 0 },
 }
 
-type Project = (typeof projects)[number]
-
-export default function Portfolio() {
-  const [selected, setSelected] = useState<Project | null>(null)
+export default function Portfolio({ content }: PortfolioProps) {
+  const projects = content.projects
+  const [selected, setSelected] = useState<PortfolioProject | null>(null)
   const [index, setIndex] = useState(0)
 
   const images = selected?.images ?? []
@@ -101,13 +49,13 @@ export default function Portfolio() {
     return () => window.removeEventListener("keydown", onKey)
   }, [selected, goPrev, goNext])
 
-  const openProject = (p: Project) => {
+  const openProject = (p: PortfolioProject) => {
     setSelected(p)
     setIndex(0)
   }
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 px-6">
+    <section id={content.id} className="py-24 md:py-32 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -116,10 +64,10 @@ export default function Portfolio() {
           viewport={{ once: true }}
         >
           <p className="text-accent text-sm uppercase tracking-[0.3em] mb-4">
-            Portfolio
+            {content.label}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-soft-white tracking-tight">
-            Selected Work
+            {content.title}
           </h2>
         </motion.div>
 

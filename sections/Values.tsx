@@ -1,13 +1,5 @@
-"use client";
-
-import { motion } from "framer-motion";
-
-const values = [
-  { title: "Integrity", desc: "Transparency and accountability in every project." },
-  { title: "Innovation", desc: "Pushing boundaries with light and technology." },
-  { title: "Sustainability", desc: "Efficient, responsible lighting for the future." },
-  { title: "Excellence", desc: "Relentless attention to detail and craft." },
-];
+import MotionWrapper from "@/components/MotionWrapper";
+import type { ValuesSection } from "@/types/content";
 
 const container = {
   hidden: { opacity: 0 },
@@ -22,33 +14,37 @@ const card = {
   visible: { opacity: 1, y: 0 },
 };
 
-export default function Values() {
+interface ValuesProps {
+  content: ValuesSection;
+}
+
+export default function Values({ content }: ValuesProps) {
   return (
-    <section id="values" className="py-24 md:py-32 px-6">
+    <section id={content.id} className="py-24 md:py-32 px-6">
       <div className="max-w-7xl mx-auto">
-        <motion.div
+        <MotionWrapper
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <p className="text-accent text-sm uppercase tracking-[0.3em] mb-4">
-            Our Foundation
+            {content.label}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-soft-white tracking-tight">
-            Values
+            {content.title}
           </h2>
-        </motion.div>
+        </MotionWrapper>
 
-        <motion.div
+        <MotionWrapper
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
         >
-          {values.map((v) => (
-            <motion.div
+          {content.items.map((v) => (
+            <MotionWrapper
               key={v.title}
               variants={card}
               className="p-8 rounded-sm border border-white/10 bg-charcoal/30 hover:border-accent/20 transition-colors duration-300"
@@ -58,11 +54,11 @@ export default function Values() {
                 {v.title}
               </h3>
               <p className="text-soft-white/60 text-sm leading-relaxed">
-                {v.desc}
+                {v.description}
               </p>
-            </motion.div>
+            </MotionWrapper>
           ))}
-        </motion.div>
+        </MotionWrapper>
       </div>
     </section>
   );

@@ -1,33 +1,4 @@
-"use client";
-
-const branches = [
-  {
-    name: "Egypt Branch",
-    items: [
-      { icon: "phone", text: "+201070045444" },
-      { icon: "phone", text: "+2-25387559" },
-      { icon: "location", text: "Egypt: EL-lotus, block 65, new Cairo fifth settlement, Cairo" },
-    ],
-  },
-  {
-    name: "Germany Branch",
-    items: [
-      { icon: "phone", text: "+49 176 40470227" },
-      { icon: "location", text: "Baustrasse 31, 47137 Duisburg" },
-    ],
-  },
-  {
-    name: "Oman Branch",
-    items: [
-      { icon: "phone", text: "00968 24472622" },
-      { icon: "phone", text: "00968 99413130" },
-      { icon: "location", text: "Almaha st. 42, Muscat, Oman" },
-      { icon: "email", text: "Info@hany-george.com" },
-      { icon: "box", text: "P.O. Box: 149, PC 200" },
-      { icon: "doc", text: "CR number: 1477965" },
-    ],
-  },
-];
+import type { Footer as FooterContent } from "@/types/content";
 
 function Icon({ type }: { type: string }) {
   const className = "w-4 h-4 shrink-0 text-accent";
@@ -63,16 +34,20 @@ function Icon({ type }: { type: string }) {
   }
 }
 
-export default function Footer() {
+interface FooterProps {
+  content: FooterContent;
+}
+
+export default function Footer({ content }: FooterProps) {
   return (
     <footer className="bg-charcoal border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
         <h2 className="font-display text-2xl md:text-3xl font-bold text-soft-white uppercase tracking-tight mb-12">
-          Contact Us
+          {content.title}
         </h2>
 
         <div className="grid md:grid-cols-3 gap-10 md:gap-12 mb-14">
-          {branches.map((branch) => (
+          {content.branches.map((branch) => (
             <div key={branch.name}>
               <div className="flex items-center gap-2 mb-4">
                 <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
@@ -93,24 +68,20 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 pb-12 border-b border-white/10">
-          <a
-            href="mailto:info@light-faktor.com"
-            className="flex items-center gap-3 text-soft-white/90 hover:text-accent transition-colors"
-          >
-            <Icon type="email" />
-            <span>info@light-faktor.com</span>
-          </a>
-          <a
-            href="mailto:technical@light-faktor.com"
-            className="flex items-center gap-3 text-soft-white/90 hover:text-accent transition-colors"
-          >
-            <Icon type="email" />
-            <span>technical@light-faktor.com</span>
-          </a>
+          {content.emails.map((email) => (
+            <a
+              key={email}
+              href={`mailto:${email}`}
+              className="flex items-center gap-3 text-soft-white/90 hover:text-accent transition-colors"
+            >
+              <Icon type="email" />
+              <span>{email}</span>
+            </a>
+          ))}
         </div>
 
         <p className="font-display text-2xl md:text-3xl font-semibold text-soft-white uppercase tracking-tight text-center pt-10">
-          Thank You
+          {content.closing}
         </p>
       </div>
     </footer>

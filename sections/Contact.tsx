@@ -3,8 +3,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button";
+import type { ContactSection } from "@/types/content";
 
-export default function Contact() {
+interface ContactProps {
+  content: ContactSection;
+}
+
+export default function Contact({ content }: ContactProps) {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 bg-charcoal/30">
+    <section id={content.id} className="py-24 md:py-32 px-6 bg-charcoal/30">
       <div className="max-w-2xl mx-auto">
         <motion.div
           className="text-center mb-12"
@@ -22,10 +27,10 @@ export default function Contact() {
           viewport={{ once: true }}
         >
           <p className="text-accent text-sm uppercase tracking-[0.3em] mb-4">
-            Get in Touch
+            {content.label}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-soft-white tracking-tight">
-            Start a Project
+            {content.title}
           </h2>
         </motion.div>
 
@@ -37,60 +42,39 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div>
-            <label htmlFor="name" className="block text-sm text-soft-white/70 mb-2">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Your name"
-              className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm text-soft-white/70 mb-2">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className="block text-sm text-soft-white/70 mb-2">
-              Phone
-            </label>
-            <input
-              id="phone"
-              type="tel"
-              name="phone"
-              placeholder="+20 XXX XXX XXXX"
-              className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm text-soft-white/70 mb-2">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              placeholder="Tell us about your project..."
-              className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors resize-none"
-            />
-          </div>
+          {content.form.fields.map((field) => (
+            <div key={field.name}>
+              <label
+                htmlFor={field.name}
+                className="block text-sm text-soft-white/70 mb-2"
+              >
+                {field.label}
+              </label>
+              {field.type === "textarea" ? (
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  rows={4}
+                  placeholder={field.placeholder}
+                  className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors resize-none"
+                />
+              ) : (
+                <input
+                  id={field.name}
+                  type={field.type as "text" | "email" | "tel"}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  className="w-full px-4 py-3 bg-background border border-white/10 rounded-sm text-soft-white placeholder:text-soft-white/40 focus:outline-none focus:border-accent/50 transition-colors"
+                />
+              )}
+            </div>
+          ))}
 
           {submitted ? (
-            <p className="text-accent text-sm">Thank you. We&apos;ll be in touch.</p>
+            <p className="text-accent text-sm">{content.form.submit.success}</p>
           ) : (
             <Button type="submit" className="w-full sm:w-auto">
-              Start a Project
+              {content.form.submit.text}
             </Button>
           )}
         </motion.form>

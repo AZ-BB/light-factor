@@ -17,6 +17,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        arabic: ["var(--font-cairo)", "system-ui", "sans-serif"],
         display: ["var(--font-syne)", "var(--font-outfit)", "sans-serif"],
       },
       animation: {
