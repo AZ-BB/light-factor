@@ -4,18 +4,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import LanguageSwitcher from "./LanguageSwitcher";
+import type { Navigation } from "@/types/content";
 
-const links = [
-  { href: "#hero", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#process", label: "Process" },
-  { href: "#values", label: "Values" },
-  { href: "#contact", label: "Contact" },
-];
+interface NavProps {
+  content: Navigation;
+  currentLang: string;
+  availableLanguages: string[];
+}
 
-export default function Nav() {
+export default function Nav({ content, currentLang, availableLanguages }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -41,15 +39,15 @@ export default function Nav() {
             className="font-display text-xl font-semibold tracking-tight text-soft-white hover:text-accent transition-colors"
           >
             <Image
-              src="/logo/horizontal-white-no-bg.png"
-              alt="Light Faktor"
+              src={content.logo.image}
+              alt={content.logo.alt}
               width={150}
               height={100}
             />
           </Link>
 
           <ul className="hidden md:flex items-center gap-8">
-            {links.map(({ href, label }) => (
+            {content.links.map(({ href, label }) => (
               <li key={href}>
                 <Link
                   href={href}
@@ -59,11 +57,19 @@ export default function Nav() {
                 </Link>
               </li>
             ))}
+            <li className="hidden md:block">
+              <LanguageSwitcher
+                currentLang={currentLang}
+                availableLanguages={availableLanguages}
+                variant="compact"
+              />
+            </li>
           </ul>
 
-          <button
-            type="button"
-            className="md:hidden p-2 text-soft-white/80 hover:text-accent"
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              className="md:hidden p-2 text-soft-white/80 hover:text-accent"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
           >
@@ -71,6 +77,7 @@ export default function Nav() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
+          </div>
         </nav>
       </motion.header>
 
@@ -94,7 +101,7 @@ export default function Nav() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              {links.map(({ href, label }, i) => (
+              {content.links.map(({ href, label }, i) => (
                 <motion.div
                   key={href}
                   initial={{ opacity: 0, y: 20 }}
@@ -111,6 +118,18 @@ export default function Nav() {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.3 }}
+              >
+                <LanguageSwitcher
+                  currentLang={currentLang}
+                  availableLanguages={availableLanguages}
+                  variant="default"
+                />
+              </motion.div>
             </div>
           </motion.div>
         )}
